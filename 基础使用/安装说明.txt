@@ -1,0 +1,64 @@
+1. 安装nvidia最新版的驱动   https://www.nvidia.cn/drivers/lookup/
+2. 控制面板 -》 程序 -》打开Hyper-V  Windows虚拟机监控程序平台  适用于Linux的Windows子系统  虚拟机平台   打开Win11自动更新
+3. 打开wsl2   wsl --version    wsl --update    
+4. 安装store
+    Get-AppxPackage -alluser *WindowsStore* | Remove-AppxPackage
+    Add-AppxPackage -Register "C:\Program Files\WindowsApps\*WindowsStore*\AppXManifest.xml" -DisableDevelopmentMode
+5. 安装ubuntu22.04
+6. 使用工具连接ubuntu
+    sudo apt update
+    sudo apt install openssh-server
+    sudo vi /etc/ssh/sshd_config
+    sudo service ssh restart
+    Win11使用管理员权限打开powershell  netsh advfirewall firewall add rule name="WSL 2 SSH" dir=in action=allow protocol=TCP localport=22
+    ip addr show eth0
+    添加finalshell
+7. 安装必要环境
+    sudo apt install cmake
+    sudo apt install build-essential
+8. 代理到win（可选）
+    cat /etc/resolv.conf   nameserver 10.255.255.254
+    sudo vim ~/.bashrc
+    export http_proxy="http://10.255.255.254:7890"
+    export https_proxy="https://10.255.255.254:7890"
+    export all_proxy="sock5://10.255.255.254:7890"
+    source ~/.bashrc
+    需要打开Win11的代理软件的共享局域网
+    ping www.hktvmall.com
+8. 安装cuda  这里需要根据你安装的版本修改路径名
+    https://developer.nvidia.com/cuda-downloads
+    sudo vim ~/.bashrc
+    export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/cuda-12.5/lib64
+    export PATH=$PATH:/usr/local/cuda-12.5/bin
+    export CUDA_HOME=$CUDA_HOME:/usr/local/cuda-12.5
+    source ~/.bashrc
+9. 安装conda  请千万不要以root的权限安装！
+    sudo sh Miniconda3-latest-Linux-x86_64.sh   输入两次yes  重启命令行
+    如果不小心按了no   cd /home/hzp/miniconda3/bin   conda init  
+    配置清华镜像（可选）
+    conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/
+    conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main/
+    conda config --set show_channel_urls yes
+    mkdir -p ~/.pip/
+    echo "[global]" > ~/.pip/pip.conf
+    echo "index-url = https://pypi.tuna.tsinghua.edu.cn/simple" >> ~/.pip/pip.conf
+    echo "[install]" >> ~/.pip/pip.conf
+    echo "trusted-host = pypi.tuna.tsinghua.edu.cn" >> ~/.pip/pip.conf
+10. 安装xinference
+    https://inference.readthedocs.io/zh-cn/stable/getting_started/installation.html
+    conda create -n xin python=3.11
+    conda activate xin
+    pip install "xinference[transformers,vllm]"  (对于glm系列的模型量化，transformers的版本可能需要自己修改)
+    XINFERENCE_MODEL_SRC=modelscope xinference-local --host 0.0.0.0 --port 9997
+    启动模型
+11. 安装chatchat
+    https://github.com/chatchat-space/Langchain-Chatchat
+    新建conda环境  conda create -n lang python=3.11
+    conda activate lang
+    pip install "langchain-chatchat[xinference]" -U
+    mkdir chatchat
+    export CHATCHAT_ROOT=/home/hzp/chatchat
+    chatchat init
+    chatchat kb -r
+    chatchat start -a
+    
