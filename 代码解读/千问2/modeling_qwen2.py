@@ -153,7 +153,7 @@ def repeat_kv(hidden_states: torch.Tensor, n_rep: int) -> torch.Tensor:
     hidden_states = hidden_states[:, :, None, :, :].expand(batch, num_key_value_heads, n_rep, slen, head_dim)
     return hidden_states.reshape(batch, num_key_value_heads * n_rep, slen, head_dim)
 
-# 修改使用滑动窗口的多头注意力机制以及稀疏Attention, Qwen2Attention只是一个基类，还有两种高效的注意力机制是继续自这里
+# 修改使用滑动窗口的多头注意力机制以及稀疏Attention, Qwen2Attention只是一个基类，还有两种高效的注意力机制是继承自这里
 class Qwen2Attention(nn.Module):
     def __init__(self, config: Qwen2Config, layer_idx: Optional[int] = None):
         super().__init__()
