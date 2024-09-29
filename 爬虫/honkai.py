@@ -1010,7 +1010,7 @@ if __name__ == '__main__':
     for task in activity_tasks:
         get_every_activity_task_info(task)
         sleep(2)
-        with open('activity_taskss.json', 'w', encoding='utf-8') as f:
+        with open('activity_tasks.json', 'w', encoding='utf-8') as f:
             json.dump(activity_tasks,f,default=default_encoder,ensure_ascii=False,indent=4)
 
     pass
