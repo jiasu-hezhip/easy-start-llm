@@ -7,7 +7,7 @@ def rename_folders(root_folder):
     for folder_name in os.listdir(root_folder):
         folder_path = os.path.join(root_folder, folder_name)
         if os.path.isdir(folder_path):
-            new_folder_name = folder_name.replace('免費高清AV在線看  AV看到飽(1).m3u8', '')
+            new_folder_name = folder_name.replace('test.m3u8', '')
             new_folder_path = os.path.join(root_folder, new_folder_name)
             if folder_name != new_folder_name:
                 os.rename(folder_path, new_folder_path)
