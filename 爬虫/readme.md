@@ -1,5 +1,5 @@
 ## 请遵守CC [BY-NC-SA 4.0协议](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hans)
-项目数据来源[崩坏星穹铁道 wiki](https://wiki.biligame.com/sr/%E9%A6%96%E9%A1%B5]) ,非官方民间组织，为爱发电，欢迎各路能人异士加入。
+项目数据来源[崩坏星穹铁道 wiki](https://wiki.biligame.com/sr/%E9%A6%96%E9%A1%B5) ,非官方民间组织，为爱发电，欢迎各路能人异士加入。
 
 ## 项目目的
 为了大家能更方便的训练自己的垂类大模型。我爬取了崩坏星穹铁道wiki的数据，提供给大家使用。
